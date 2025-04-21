@@ -1,0 +1,146 @@
+.donate-page-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .donate-title {
+    font-size: 2.5rem;
+    color: #2d3436;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .donate-head {
+    font-size: 1.3rem;
+    color: #2d3436;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+  }
+  
+  .campaign-summary {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+  }
+  
+  .campaign-title {
+    font-size: 1.8rem;
+    color: #2d3436;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .campaign-story {
+    font-size: 1.1rem;
+    color: #636e72;
+    line-height: 1.6;
+  }
+  
+  .donation-input-group {
+    margin: 2rem 0;
+  }
+  
+  .donation-label {
+    display: block;
+    font-size: 1.2rem;
+    color: #2d3436;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+  }
+  
+  .donation-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+    outline: none;
+  }
+  
+  .donation-input:focus {
+    border-color: #00b894;
+    box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.1);
+  }
+  
+  .donate-button-final {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    background: #00b894;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .donate-button:hover {
+    background: #00a884;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 184, 148, 0.2);
+  }
+  
+  .donate-button:active {
+    transform: translateY(0);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .donate-page-container {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
+  
+    .donate-title {
+      font-size: 2rem;
+    }
+  
+    .campaign-title {
+      font-size: 1.5rem;
+    }
+  
+    .campaign-story {
+      font-size: 1rem;
+    }
+  }
+  
+  /* Loading State Styles */
+  .donate-button:disabled {
+    background: #b2bec3;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* Amount Input Animations */
+  .donation-input-group {
+    position: relative;
+  }
+  
+  .donation-input:focus + .donation-label {
+    color: #00b894;
+  }
+  
+  /* Error State */
+  .donation-input.error {
+    border-color: #ff7675;
+  }
+  
+  /* Success Animation */
+  @keyframes successPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+  }
+  
+  .donation-success {
+    animation: successPulse 0.3s ease-in-out;
+  }
