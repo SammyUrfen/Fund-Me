@@ -20,6 +20,25 @@
     margin-bottom: 2rem;
   }
   
+  .campaign-creator {
+    margin: 1rem 0 2rem;
+    padding: 1rem;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .creator-name {
+    color: #2563eb;
+    font-weight: 600;
+  }
+  
+  .creator-date {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
   .campaign-images {
     width: 100%;
     border-radius: 12px;

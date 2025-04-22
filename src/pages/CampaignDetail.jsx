@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import ReactConfetti from 'react-confetti';
 import { doc, getDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
@@ -12,6 +13,11 @@ const CampaignPage = () => {
   const { id } = useParams();
   const { campaign, setCampaign } = useCampaign();
   const [loading, setLoading] = useState(true);
+  const [creator, setCreator] = useState(null);
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -22,7 +28,14 @@ const CampaignPage = () => {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setCampaign({ id: docSnap.id, ...docSnap.data() });
+          const campaignData = { id: docSnap.id, ...docSnap.data() };
+          setCampaign(campaignData);
+          const creatorRef = doc(db, "users", campaignData.createdBy);
+          const creatorSnap = await getDoc(creatorRef);
+          if (creatorSnap.exists()) {
+            setCreator(creatorSnap.data());
+          }
+          // console.log("campaign creator:" , creatorSnap.data());
         } else {
           console.error("Campaign not found");
         }
@@ -35,6 +48,20 @@ const CampaignPage = () => {
 
     fetchCampaign();
   }, [id, setCampaign]);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
 
   const handleDonateClick = () => {
     if (!user) {
@@ -78,7 +105,31 @@ const CampaignPage = () => {
 
   return (
     <div className="campaign-page-container">
+      {campaign.currentAmount >= campaign.goalAmount && (
+        <>
+          <ReactConfetti
+            width={windowSize.width}
+            height={windowSize.height}
+            recycle={false}
+            numberOfPieces={500}
+          />
+          <div className="goal-reached-banner">
+            <span className="party-emoji">🎉</span>
+            <h1>Campaign Fully Funded!</h1>
+            <h3>Thank you to all our generous donors!</h3>
+            <span className="party-emoji">🎉</span>
+          </div>
+        </>
+      )}
+
       <h1 className="campaign-page-title">{campaign.title}</h1>
+
+      {creator && (
+        <div className="campaign-creator">
+          <p>Created by: <span className="creator-name">{creator.displayName || creator.email}</span></p>
+          <p className="creator-date">Started on: {new Date(campaign.createdAt?.toDate()).toLocaleDateString()}</p>
+        </div>
+      )}
       
       <div className="campaign-content-wrapper">
         <div className="campaign-images">

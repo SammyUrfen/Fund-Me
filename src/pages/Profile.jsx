@@ -30,6 +30,7 @@ const Profile = () => {
   const [campaignsCreated, setCampaignsCreated] = useState([]);
   const [campaignsDonated, setCampaignsDonated] = useState([]);
   const [loading, setLoading] = useState(true);
+  // console.log("user", user);
 
   useEffect(() => {
     const fetchProfileData = async () => {

@@ -37,6 +37,7 @@ const Home = () => {
         <h2 className="section-heading">Ongoing Campaigns</h2>
         <div className="campaigns-grid">
           {campaigns.map(campaign => (
+            (campaign.currentAmount < campaign.goalAmount) &&
             <Link to={`/campaign/${campaign.id}`} key={campaign.id} className="campaign-card-link">
               <CampaignCard campaign={campaign} />
             </Link>
